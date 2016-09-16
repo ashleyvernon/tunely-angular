@@ -3,8 +3,6 @@
  * This is your main angular file. Edit as you see fit.
  *
  */
-<<<<<<< HEAD
-=======
 
 angular
   .module('tunely', [])
@@ -40,5 +38,31 @@ function AlbumsIndexController ($http) {
       console.log('There was an error posting the data', response);
     });
   }
+
+  vm.deleteAlbum = function(album) {
+    $http({
+      method: 'DELETE',
+      url: '/api/albums/' + album._id
+    }).then(function successCallback(json) {
+      var index = vm.albums.indexOf(album);
+      console.log(json);
+      vm.albums.splice(index, 1);
+    }, function errorCallback(response) {
+      console.log('There was an error deleting the data', response);
+    });
+  }
+  
+  vm.editAlbum = function(album) {
+    $http({
+      method: 'PUT', 
+      url: 'api/albums/' + album._id
+    }).then(function successCallback(json) {
+      var index = vm.albums.indexOf(album);
+      console.log("hello");
+      vm.albums.splice(index, 1);
+    }, function errorCallback(response) {
+      console.log('There was an error updating the data', response)
+    })
+  }
 }
->>>>>>> b68f1a87bfab30b67f39618fcf7997dc9af02db3
+
